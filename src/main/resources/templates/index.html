@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<h1>Agregar producto</h1>
+<form id="usrform" action="#" th:action="@{/registro}" th:object="${estudiante}" method="post">
+ <p>
+ 	nombre: <input type="text" th:field="*{nombre}">
+ </p>
+ <span th:errors="*{nombre}" style="color: #FF0000"></span>
+ <p>
+ 	apellido: <input type="text" th:field="*{apellido}">
+ </p>
+ <span th:errors="*{apellido}" style="color: #FF0000"></span>
+  <p>
+ 	carne: <input type="text" th:field="*{carne}">
+ </p>
+ <span th:errors="*{carne}" style="color: #FF0000"></span>
+ <p>
+    carrera: <input type="text" th:field="*{carrera}">
+ </p>
+ <span th:errors="*{carrera}" style="color: #FF0000"></span>
+ 
+  
+ <p>
+ 	<input type="submit" value="Enviar"><input type="reset" value="borrar">
+ </p>
+ 
+</form>
+<p th:text="${msg}"></p>
+
+<a href="/listado">Ir a la lista</a>
+
+</body>
+</html>
