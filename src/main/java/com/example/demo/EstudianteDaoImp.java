@@ -33,6 +33,8 @@ public class EstudianteDaoImp implements EstudianteDao {
 		}
 		return lis;
 	}
+	
+	
 
 	@Override
 	public Estudiante findOne(Integer code) throws DataAccessException {
@@ -47,6 +49,22 @@ public class EstudianteDaoImp implements EstudianteDao {
 		
 		try {
 			entity.persist(es);
+			return true;
+		} catch (Exception e) {
+			System.out.println(e);
+			return false;
+		}
+	}
+
+	
+	@Transactional
+	@Override
+	public boolean deleteEstudiante(int id) {
+
+		try {
+			System.out.println("id: " + id);
+			entity.createNativeQuery("delete from estudiante where c_usuario = :id").setParameter("id", id).executeUpdate();
+			
 			return true;
 		} catch (Exception e) {
 			System.out.println(e);

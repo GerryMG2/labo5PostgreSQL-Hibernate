@@ -11,4 +11,6 @@ public interface EstudianteDao {
 	public Estudiante findOne(Integer code) throws DataAccessException;
 	
 	public boolean insertEstudent(Estudiante es);
+	
+	public boolean deleteEstudiante(int id);
 }

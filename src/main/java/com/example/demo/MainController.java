@@ -15,7 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class MainController {
 	@Autowired
-	private EstudianteDaoImp estudianteDao;
+	private EstudianteService estudianteDao = new EstudianteService();
 	
 	@GetMapping(path = "/inicio")
 	public ModelAndView index(Estudiante estudiante) {
@@ -25,6 +25,37 @@ public class MainController {
 		return mav;
 	}
 	
+	@GetMapping(path = "/delete")
+	public ModelAndView index(deleteObject del) {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("delete");
+		
+		return mav;
+	}
+	
+	@PostMapping(path = "/delete")
+	public ModelAndView borrar(@ModelAttribute deleteObject id, BindingResult result) {
+		
+		ModelAndView mav = new ModelAndView();
+		if(result.hasErrors()) {
+			mav.setViewName("delete");
+		}else {
+			Boolean resolve = estudianteDao.deleteEstudiante(id.getId());
+			if(resolve) {
+				mav.setViewName("delete");
+				mav.addObject("msg", "Se elimino con exito!");
+			}else {
+				mav.setViewName("delete");
+				mav.addObject("msg", "hubo un problema al eliminar");
+			}
+		}
+		
+		
+		return mav;
+	}
+	
+	
+	
 	
 	@PostMapping(path = "/registro")
 	public ModelAndView registrar(@ModelAttribute Estudiante est, BindingResult result) {
@@ -33,7 +64,7 @@ public class MainController {
 		if(result.hasErrors()) {
 			mav.setViewName("index");
 		}else {
-			Boolean resolve = estudianteDao.insertEstudent(est);
+			Boolean resolve = estudianteDao.insertEstudiante(est);
 			if(resolve) {
 				mav.setViewName("index");
 				mav.addObject("msg", "Se guardo con exito!");
@@ -54,7 +85,7 @@ public class MainController {
 		mav.setViewName("listado");
 		try {
 			System.out.println("entra al try");
-			List<Estudiante> ests = estudianteDao.findAll();
+			List<Estudiante> ests = estudianteDao.getEstudiantes();
 			System.out.println(ests.size());
 			mav.addObject("estudiantes", ests);
 		} catch (Exception e) {
