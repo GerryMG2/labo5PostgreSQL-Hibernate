@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<h1>Eliminar producto</h1>
+<form id="usrform" action="#" th:action="@{/delete}" th:object="${deleteObject}" method="post">
+ <p>
+ 	id: <input type="text" th:field="*{id}">
+ </p>
+ <p>
+ 	<input type="submit" value="Enviar"><input type="reset" value="borrar">
+ </p>
+ 
+</form>
+
+<p th:text="${msg}"></p>
+
+<a href="/inicio">Ir al inicio</a>
+<a href="/listado">Ir a la lista</a>
+
+</body>
+</html>
