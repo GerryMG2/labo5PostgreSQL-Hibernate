@@ -29,5 +29,11 @@ public class EstudianteService implements serviceEstudiante {
 		
 		return dao.deleteEstudiante(id);
 	}
+	@Transactional
+	@Override
+	public boolean update(Estudiante est) {
+		// TODO Auto-generated method stub
+		return dao.updateEstudiante(est);
+	}
 
 }

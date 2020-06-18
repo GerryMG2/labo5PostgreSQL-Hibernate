@@ -72,4 +72,27 @@ public class EstudianteDaoImp implements EstudianteDao {
 		}
 	}
 
+
+	@Transactional
+	@Override
+	public boolean updateEstudiante(Estudiante es) {
+		
+		try {
+			System.out.println("id: " + es.getCodigo());
+			System.out.println("id: " + es.getCarrera());
+			entity.createNativeQuery("update estudiante set nombre=:nombre, apellido=:apellido, carne=:carne,carrera=:carrera where c_usuario=:codigo")
+			.setParameter("nombre", es.getNombre())
+			.setParameter("apellido", es.getApellido())
+			.setParameter("carne", es.getCarne())
+			.setParameter("carrera", es.getCarrera())
+			.setParameter("codigo", es.getCodigo())
+			.executeUpdate();
+			return true;
+		} catch (Exception e) {
+			System.out.println(e);
+			return false;
+		}
+		
+	}
+
 }

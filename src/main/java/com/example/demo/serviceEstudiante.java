@@ -8,5 +8,7 @@ public interface serviceEstudiante {
 	public boolean insertEstudiante(Estudiante est);
 	
 	public boolean deleteEstudiante(int id);
+	
+	public boolean update(Estudiante est);
 
 }

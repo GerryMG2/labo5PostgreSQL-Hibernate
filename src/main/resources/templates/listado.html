@@ -5,43 +5,48 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>Lista de Estudiantes</h1>
+	<h1>Lista de Estudiantes</h1>
 
-<table>
-	<thead>
-		<th>
-			Nombre
-		</th>
-		<th>
-			apellido
-		</th>
-		<th>
-			carne
-		</th>
-		<th>
-			carrera
-		</th>
-		
-	</thead>
-	
-	<th:block th:each="estudiante, row: ${estudiantes}">
-	
-	<tr>
-		<th th:text=${estudiante.codigo} />
-	
-		<th th:text=${estudiante.Nombre} />
-	
-		<th th:text=${estudiante.apellido} />
+	<table>
+		<thead>
+			<th>Codigo</th>
+			<th>Nombre</th>
+			<th>apellido</th>
+			<th>carne</th>
+			<th>carrera</th>
+			<th>editar</th>
+		</thead>
 
-		<th th:text=${estudiante.carne} />
+		<th:block th:each="estudiant, row: ${estudiantes}">
 
-		<th th:text=${estudiante.carrera} />
-	</tr>
+			<tr>
+				<th th:text=${estudiant.codigo} />
+
+				<th th:text=${estudiant.Nombre} />
+
+				<th th:text=${estudiant.apellido} />
+
+				<th th:text=${estudiant.carne} />
+
+				<th th:text=${estudiant.carrera} />
+
+				<th>
+					<form action="#" th:action="@{/editarr}" th:object="${idcode}" method="post">
+						
+						Ingrese el mismo id: <input type="text" th:field="*{id}"  value="${estudiant.codigo}">
+						
+						 <input
+							type="submit" value="Editar">
+
+					</form>
+
+				</th>
+			</tr>
 		</th:block>
 
-</table>
+	</table>
 
-<a href="/inicio"> registro</a>
+	<a href="/inicio"> registro</a>
 
 </body>
 </html>

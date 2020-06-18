@@ -25,6 +25,22 @@ public class MainController {
 		return mav;
 	}
 	
+	@PostMapping(path = "/editarr")
+	public ModelAndView editar(idcodigo id) {
+		ModelAndView mav = new ModelAndView();
+		List<Estudiante> ests = estudianteDao.getEstudiantes();
+		System.out.println("codigo:"+id.getId());
+		for(Estudiante es: ests) {
+			if(es.getCodigo().equals(id.getId())) {
+				System.out.println(es.getNombre());
+				mav.addObject("estudiante",es);
+			}
+		}
+		mav.setViewName("editar");
+		
+		return mav;
+	}
+	
 	@GetMapping(path = "/delete")
 	public ModelAndView index(deleteObject del) {
 		ModelAndView mav = new ModelAndView();
@@ -54,6 +70,26 @@ public class MainController {
 		return mav;
 	}
 	
+	@PostMapping(path = "/editar")
+	public ModelAndView editarr(@ModelAttribute Estudiante est, BindingResult result) {
+		System.out.println(est.getCodigo());
+		ModelAndView mav = new ModelAndView();
+		if(result.hasErrors()) {
+			mav.setViewName("index");
+		}else {
+			Boolean resolve = estudianteDao.update(est);
+			if(resolve) {
+				mav.setViewName("ok");
+				mav.addObject("msg", "Se guardo con exito!");
+			}else {
+				mav.setViewName("ok");
+				mav.addObject("msg", "hubo un problema al guardar");
+			}
+		}
+		
+		
+		return mav;
+	}
 	
 	
 	
@@ -88,6 +124,8 @@ public class MainController {
 			List<Estudiante> ests = estudianteDao.getEstudiantes();
 			System.out.println(ests.size());
 			mav.addObject("estudiantes", ests);
+			idcodigo id = new idcodigo();
+			mav.addObject("idcode", id );
 		} catch (Exception e) {
 			System.out.println(e);
 			// TODO: handle exception

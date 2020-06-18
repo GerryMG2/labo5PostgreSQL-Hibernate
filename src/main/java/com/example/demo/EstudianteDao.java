@@ -13,4 +13,6 @@ public interface EstudianteDao {
 	public boolean insertEstudent(Estudiante es);
 	
 	public boolean deleteEstudiante(int id);
+	
+	public boolean updateEstudiante(Estudiante es);
 }
